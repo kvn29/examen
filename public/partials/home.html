@@ -84,7 +84,7 @@
         <h1>Ils réagissent</h1>
         <div ng-repeat="hotel in homeStore.hotels">
           <ul>
-            <li ng-repeat="review in hotel.reviews | orderBy:'createdOn'">
+            <li ng-repeat="review in hotel.reviews">
               <span class="commentName">{{review.name}}</span>
               <span ng-show="review.rating === 0">
                 <img src="img/vide.png" alt="" class="etoile"/>
