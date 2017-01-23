@@ -1,0 +1,93 @@
+.etoile {
+  width:15px;
+  vertical-align: top;
+}
+header {
+  background:#00357f;
+  position: fixed;
+  z-index: 2;
+  width: 100%;
+}
+.topBar {
+  height:50px;
+}
+#logo {
+  font-size: 20px;
+  color: white;
+  margin-top: 9px;
+  display: inline-block;
+}
+.marginTop {
+  margin-top: 20px;
+}
+.listHotel {
+  background: linear-gradient(to bottom,#ffc457 0,#feba02 100%);
+  border:1px solid #e2a711;
+  border-radius: 3px;
+  padding:10px;
+}
+  .listHotel > h1, .listCommentaire > h1, .bloc > h1 {color: #003580;}
+  .listHotel > ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  .listHotel li {
+    font-size: 18px;
+    color:black;
+  }
+
+.listCommentaire, .bloc {
+  padding: 10px;
+  border:1px solid #003580;
+  border-radius: 3px;
+}
+  .listCommentaire ul {
+    list-style-type: none;
+    padding: 0;
+  }
+.commentName {
+  color:#003580;
+  font-size: 18px;
+}
+.commentReview {
+  color:black;
+  font-size: 16px;
+}
+
+
+.linkToHotel {
+  color:#0896ff;
+  font-size: 15px;
+  font-weight: bold;
+}
+/*HOTEL*/
+.room {
+  margin-bottom: 10px;
+}
+.roomBorder {
+  background: linear-gradient(to bottom,#ffc457 0,#feba02 100%);
+  border:1px solid #e2a711;
+  border-radius: 3px;
+  padding:10px;
+}
+
+p.hotelDescription {
+  font-size: 20px;
+}
+.hotelTitle {
+  margin: 0;
+  color: #003580;
+}
+.room h4 {
+  color: #003580;
+}
+td {
+  border:0 !important;
+}
+.roomDescription {
+  font-size: 16px;
+  color:black;
+}
+.btnReserver {
+  margin-bottom: 10px;
+}

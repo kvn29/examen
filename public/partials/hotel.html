@@ -1,0 +1,110 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12">
+      <img ng-src="{{hotelStore.hotel.photos[0]}}" class="img-responsive"/>
+      <br/>
+      <h1 class="hotelTitle">{{hotelStore.hotel.name}}</h1><br/>
+      <p class="hotelDescription">{{hotelStore.hotel.description}}</p>
+    </div>
+  </div>
+
+  <div class="row marginTop">
+    <div class="col-xs-12 col-sm-6 room" ng-repeat="room in hotelStore.hotel.rooms">
+      <div class="roomBorder">
+        <table class="table">
+          <tr style="height:30px;">
+            <td><h4>{{room.type}}</h4></td>
+            <td style="text-align:right;"><h4>{{room.price | currency}}</h4></td>
+          </tr>
+          <tr>
+            <td colspan="2" class="roomDescription">
+              {{room.description}}<br/>
+              <font style="font-size:14px;color:#444;">{{room.number}} chambres disponibles</font>
+            </td>
+          </tr>
+        </table>
+        <button class="btn pull-right btnReserver btn-primary">Réserver</button>
+        <img ng-src="{{room.photos[0]}}" alt="photo" class="img-responsive"/>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12 col-sm-6">
+      <div class="bloc">
+        <h1>Laisser un commentaire</h1>
+        <form name="ajouterCommentaireForm" ng-submit="ajouterCommentaireForm.$valid && hotelStore.ajouterCommentaire(this)">
+          <div class="form-group">
+            <label for="exampleInputEmail1">Nom</label>
+            <input ng-model="name" type="text" placeholder="name" required class="form-control" />
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Note</label>
+            <input ng-model="rating" type="number" value="0" min="0" max="5" required class="form-control" />
+          </div>
+          <br/>
+          <textarea ng-model="commentaire" required></textarea>
+          <input type="submit" value="Add" class="form-control" />
+        </form>
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-6">
+      <div class="listCommentaire">
+
+        <h1>Commentaires</h1>
+          <ul>
+            <li ng-repeat="review in hotelStore.hotel.reviews | orderBy:'createdOn'">
+              <span class="commentName">{{review.name}}</span>
+              <span ng-show="review.rating === 0">
+                <img src="img/vide.png" alt="" class="etoile"/>
+                <img src="img/vide.png" alt="" class="etoile"/>
+                <img src="img/vide.png" alt="" class="etoile"/>
+                <img src="img/vide.png" alt="" class="etoile"/>
+                <img src="img/vide.png" alt="" class="etoile"/>
+              </span>
+              <span ng-show="review.rating === 1">
+                <img src="img/pleine.png" alt="" class="etoile"/>
+                <img src="img/vide.png" alt="" class="etoile"/>
+                <img src="img/vide.png" alt="" class="etoile"/>
+                <img src="img/vide.png" alt="" class="etoile"/>
+                <img src="img/vide.png" alt="" class="etoile"/>
+              </span>
+              <span ng-show="review.rating === 2">
+                <img src="img/pleine.png" alt="" class="etoile"/>
+                <img src="img/pleine.png" alt="" class="etoile"/>
+                <img src="img/vide.png" alt="" class="etoile"/>
+                <img src="img/vide.png" alt="" class="etoile"/>
+                <img src="img/vide.png" alt="" class="etoile"/>
+              </span>
+              <span ng-show="review.rating === 3">
+                <img src="img/pleine.png" alt="" class="etoile"/>
+                <img src="img/pleine.png" alt="" class="etoile"/>
+                <img src="img/pleine.png" alt="" class="etoile"/>
+                <img src="img/vide.png" alt="" class="etoile"/>
+                <img src="img/vide.png" alt="" class="etoile"/>
+              </span>
+              <span ng-show="review.rating === 4">
+                <img src="img/pleine.png" alt="" class="etoile"/>
+                <img src="img/pleine.png" alt="" class="etoile"/>
+                <img src="img/pleine.png" alt="" class="etoile"/>
+                <img src="img/pleine.png" alt="" class="etoile"/>
+                <img src="img/vide.png" alt="" class="etoile"/>
+              </span>
+              <span ng-show="review.rating === 5">
+                <img src="img/pleine.png" alt="" class="etoile"/>
+                <img src="img/pleine.png" alt="" class="etoile"/>
+                <img src="img/pleine.png" alt="" class="etoile"/>
+                <img src="img/pleine.png" alt="" class="etoile"/>
+                <img src="img/pleine.png" alt="" class="etoile"/>
+              </span>
+              <br/>
+               {{review.review}}
+              <br/>
+
+            </li>
+          </ul>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
