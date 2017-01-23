@@ -39,7 +39,7 @@
   //   type: Date,
   //   "default": Date.now
   // }
-  app.controller('hotelController', function(hotelService, $routeParams, $templateCache, $route) {
+  app.controller('hotelController', function(hotelService, $routeParams) {
     var hotelID = $routeParams.hotelID;
     this.hotel = {};
 
@@ -57,10 +57,7 @@
       };
 
       hotelService.postAddComment(hotelID, commentaire).then((response) => {
-        // Rechargement de la route
-        var currentPageTemplate = $route.current.templateUrl;
-        $templateCache.remove(currentPageTemplate);
-        $route.reload();
+        this.hotel.reviews.push(response.data);
       });
     }
 

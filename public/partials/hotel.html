@@ -19,12 +19,39 @@
           <tr>
             <td colspan="2" class="roomDescription">
               {{room.description}}<br/>
-              <font style="font-size:14px;color:#444;">{{room.number}} chambres disponibles</font>
+
             </td>
           </tr>
         </table>
-        <button class="btn pull-right btnReserver btn-primary">Réserver</button>
-        <img ng-src="{{room.photos[0]}}" alt="photo" class="img-responsive"/>
+
+        <div class="pull-left">
+          <font style="font-size:14px;color:#444;">{{room.number}} chambres disponibles</font>
+        </div>
+        <div class="pull-right">
+          <button class="btn btnReserver btn-primary">Réserver</button>
+        </div>
+
+<br/>
+        <!-- Slider -->
+        <div id="Carousel_{{$index}}" class="carousel slide" ng-show="room.photos.length > 1">
+          <ol class="carousel-indicators">
+              <li data-target="Carousel" data-slide-to="{{$index}}" ng-repeat="photo in room.photos" ng-class="$index === 0 ? 'active' : ''"></li>
+          </ol>
+          <div class="carousel-inner">
+            <div class="item" ng-repeat="photo in room.photos" ng-class="$index === 0 ? 'active' : ''">
+              <img ng-src="{{photo}}" class="img-responsive">
+            </div>
+          </div>
+
+          <span class="left carousel-control" data-target="#Carousel_{{$index}}" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+          </span>
+          <span class="right carousel-control" data-target="#Carousel_{{$index}}" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+          </span>
+        </div>
+
+        <img ng-src="{{room.photos[0]}}" alt="photo" class="img-responsive" ng-show="room.photos.length === 1"/>
       </div>
     </div>
   </div>
@@ -36,15 +63,18 @@
         <form name="ajouterCommentaireForm" ng-submit="ajouterCommentaireForm.$valid && hotelStore.ajouterCommentaire(this)">
           <div class="form-group">
             <label for="exampleInputEmail1">Nom</label>
-            <input ng-model="name" type="text" placeholder="name" required class="form-control" />
+            <input ng-model="name" type="text" placeholder="Nom" required class="form-control" />
           </div>
           <div class="form-group">
             <label for="exampleInputEmail1">Note</label>
-            <input ng-model="rating" type="number" value="0" min="0" max="5" required class="form-control" />
+            <input ng-model="rating" type="number" value="1" min="0" max="5" required class="form-control" style="width:50px;"/>
           </div>
           <br/>
-          <textarea ng-model="commentaire" required></textarea>
-          <input type="submit" value="Add" class="form-control" />
+          <div class="form-group">
+            <label for="exampleInputEmail1">Commentaire</label>
+            <textarea ng-model="commentaire" required class="form-control"></textarea>
+          </div>
+          <input type="submit" value="Envoyer" class="btn btn-primary pull-right" /><br/><br/>
         </form>
       </div>
     </div>
@@ -53,7 +83,7 @@
 
         <h1>Commentaires</h1>
           <ul>
-            <li ng-repeat="review in hotelStore.hotel.reviews | orderBy:'createdOn'">
+            <li ng-repeat="review in hotelStore.hotel.reviews">
               <span class="commentName">{{review.name}}</span>
               <span ng-show="review.rating === 0">
                 <img src="img/vide.png" alt="" class="etoile"/>
