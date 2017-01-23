@@ -2,10 +2,17 @@
 
   var app = angular.module('examen3', ['ngRoute']);
 
+
   app.directive('header', function() {
     return {
       restrict: 'A',
       templateUrl: '/partials/common/header.html'
+    }
+  });
+  app.directive('headerconnect', function() {
+    return {
+      restrict: 'A',
+      templateUrl: '/partials/common/headerconnect.html'
     }
   });
 
@@ -18,27 +25,27 @@
 
 
   // Controllers
+  app.controller('accueilController', function(hotelService) {
+    this.seConnecter = function(form) {
+      let connexion = {
+        email: form.email,
+        motdepasse: form.motdepasse
+      };
+
+      hotelService.connexion(connexion).then((response) => {
+        console.log(response.data);
+      });
+
+    }
+  });
+
   app.controller('homeController', function(hotelService) {
     this.hotels = [];
     hotelService.getAllHotel().then((response) => {
       this.hotels = response.data;
     });
   });
-  // name: { type : String, required : true },
-  // rating: {
-  //   type: Number,
-  //   required: true,
-  //   min: 0,
-  //   max: 5
-  // },
-  // review: {
-  //   type: String,
-  //   required: true
-  // },
-  // createdOn: {
-  //   type: Date,
-  //   "default": Date.now
-  // }
+
   app.controller('hotelController', function(hotelService, $routeParams) {
     var hotelID = $routeParams.hotelID;
     this.hotel = {};
@@ -86,7 +93,8 @@
     return {
       getAllHotel: getAllHotel,
       getOneHotel: getOneHotel,
-      postAddComment: postAddComment
+      postAddComment: postAddComment,
+      connexion: connexion
     };
     function getAllHotel() {
       return $http.get('/api/hotel').then(complete).catch(failed);
@@ -96,6 +104,9 @@
     }
     function postAddComment(hotelID, commentaire) {
       return $http.post('/api/hotel/'+hotelID, commentaire).then(complete).catch(failed);
+    }
+    function connexion(connexion) {
+      return $http.post('/api/connexion', connexion).then(complete).catch(failed);
     }
 
     function complete(response) { return response; }
